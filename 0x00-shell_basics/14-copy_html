@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# Copy HTML files to the parent directory if they don't exist there
+# or if they are newer than the versions in the parent directory
+
+for file in *.html; do
+    if [[ -f ../"$file" && "$file" -ot ../"$file" ]]; then
+        echo "Skipping $file (already exists and is newer in parent directory)"
+    else
+        cp "$file" ../
+        echo "Copied $file to parent directory"
+    fi
+done
